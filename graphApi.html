@@ -63,7 +63,16 @@ Parse.initialize("ULELP48wEK1PKnXmmvZjd93vYQGE0QkpE6ZyRT8Y", "JadQAcYo4onJL1P39K
 			  indexView(); //這是預先寫好的控制版⾯的function，⾮臉書api
 			 FB.getLoginStatus(function(response) {
 			 if (response.status === 'connected') {
-			 //等等要在這邊加程式碼 使⽤FB.api()
+			 //擷取⼤頭照
+				 FB.api('/me/picture?type=large',function(response) {
+				 $('#fbImgView').html("<h5>Here are your profile photo</h5><img
+				src="+response.data.url+"crossorigin=\"anonymous\" id=preview1 / >");
+				 });
+				//個⼈資訊
+				 FB.api('/me',function(response) {
+				 $('#fbImgView').append("<h1>Welcome ,+(response['gender']=="male"?"Mr. ":"Miss ")
+				+" "+response['first_name']+"</h1>");
+				 });
 			 }
 			 });
 			 },
