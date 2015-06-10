@@ -54,17 +54,22 @@ Parse.initialize("ULELP48wEK1PKnXmmvZjd93vYQGE0QkpE6ZyRT8Y", "JadQAcYo4onJL1P39K
 		function fblogin(){
 		//step2:https://developers.facebook.com/docs/graph-api/using-graph-api/v2.3	
 		Parse.FacebookUtils.logIn(null, {
- success: function(user) {
- if (!user.existed()) {
- alert("User signed up and logged in through Facebook!");
- } else {
- alert("User logged in through Facebook!");
- }
- //等等要在這邊加程式碼 FB.getLoginStatus
- },
- error: function(user, error) {
- alert("User cancelled the Facebook login or did not fully authorize.");
- }
+			 success: function(user) {
+			 if (!user.existed()) {
+			 alert("User signed up and logged in through Facebook!");
+			 } else {
+			 alert("User logged in through Facebook!");
+			 }
+			  indexView(); //這是預先寫好的控制版⾯的function，⾮臉書api
+			 FB.getLoginStatus(function(response) {
+			 if (response.status === 'connected') {
+			 //等等要在這邊加程式碼 使⽤FB.api()
+			 }
+			 });
+			 },
+			 error: function(user, error) {
+			 alert("User cancelled the Facebook login or did not fully authorize.");
+			 }
 });	
 		}
 		
